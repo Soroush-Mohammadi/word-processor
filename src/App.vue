@@ -2,13 +2,15 @@
  <div>
   <form >
   <label for="text" class="label"><h2>paste your text here</h2></label><br>
-  <textarea  id="text" style="width: 60vw; height: 40vh" v-model="text"></textarea>
-  <button>upload text</button>
+  <textarea  id="text" style="width: 60vw; height: 40vh" v-model="text"></textarea><br>
+  <div class="container-btn">
+    <button @click="uploadText" style="height: 60px; background-color: green">upload text</button>
+  <button @click="uploadText" style="height: 60px; background-color: red">delete text</button>
+  </div>
   </form>
   <div class="container">
        <span
        :id="`#id-${word.id}`"
-       :class="{ color : background }"
        style="font-size: 32px;"
        v-for="word in createList" :key="word.id"
        @click="makeList(word)">{{ `${word.word} ` }}
@@ -34,7 +36,6 @@ export default {
       text : '',
     worldList : [],
     getText : [],
-     backgorund : false
     }
   },
 
@@ -46,6 +47,9 @@ export default {
         this.backgorund = true
       }
      })
+   },
+   uploadText(e){
+    e.preventDefault()
    },
    generateId() {
       return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -84,6 +88,18 @@ textarea {
 
 .color {
   background-color: blue;
+}
+
+.container-btn {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+}
+button {
+  color: white;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-top: 30px;
 }
 
 </style>
