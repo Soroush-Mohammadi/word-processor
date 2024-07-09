@@ -3,6 +3,7 @@
   <form >
   <label for="text" class="label"><h2>paste your text here</h2></label><br>
   <textarea  id="text" style="width: 60vw; height: 40vh" v-model="text"></textarea>
+  <button>upload text</button>
   </form>
   <div class="container">
        <span
@@ -10,7 +11,8 @@
        :class="{ color : background }"
        style="font-size: 32px;"
        v-for="word in createList" :key="word.id"
-       @click="makeList(word)">{{ `${word.word} ` }}</span>
+       @click="makeList(word)">{{ `${word.word} ` }}
+       </span>
   </div>
   <div class="word-list">
     <ul>
