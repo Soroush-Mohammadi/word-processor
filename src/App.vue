@@ -1,26 +1,87 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+ <div>
+  <form >
+  <label for="text" class="label"><h2>paste your text here</h2></label><br>
+  <textarea  id="text" style="width: 60vw; height: 40vh" v-model="text"></textarea>
+  </form>
+  <div class="container">
+       <span
+       :id="`#id-${word.id}`"
+       :class="{ color : background }"
+       style="font-size: 32px;"
+       v-for="word in createList" :key="word.id"
+       @click="makeList(word)">{{ `${word.word} ` }}</span>
+  </div>
+  <div class="word-list">
+    <ul>
+      <li v-for="word in worldList" :key="word.id">
+       <h2>
+        {{ word.word }}
+       </h2>
+      </li>
+    </ul>
+  </div>
+ </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
+<script>
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      text : '',
+    worldList : [],
+    getText : [],
+     backgorund : false
+    }
+  },
+
+  methods : {
+   makeList(word) {
+     this.worldList.push(word)
+     this.worldList.find((word) => {
+      if (word.id === word.id) {
+        this.backgorund = true
+      }
+     })
+   },
+   generateId() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    }
+  },
+
+  computed : {
+    createList() {
+      return this.text.split(" ").map((word) => {
+        return {
+          word : word,
+          id : this.generateId(),
+        }
+      })
+    },
+  }, 
+
+ 
 }
+
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+form {
+  padding: 40px;
+  background-color: lightblue;
 }
+
+.label {
+  margin: 40px;
+}
+
+textarea {
+  font-size: 32px;
+}
+
+.color {
+  background-color: blue;
+}
+
 </style>
